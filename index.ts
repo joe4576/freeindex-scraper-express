@@ -36,9 +36,9 @@ app.get("/freeindex/:profile", async (req, res) => {
 
   res.send({
     statusCode: 200,
-    body: JSON.stringify({
+    body: {
       numberOfReviews,
-    }),
+    },
   });
 });
 

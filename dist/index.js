@@ -21,18 +21,13 @@ app.get("/freeindex/:profile", async (req, res) => {
     const reviewsText = $("h2#reviewsTop").text();
     console.log({ reviewsText });
     if (!reviewsText) {
-        throw new Error("Could not find reviews");
+        return res.status(404);
     }
     const numberOfReviews = reviewsText.split(" ")[0]?.replaceAll(",", "") ?? null;
     if (numberOfReviews === null) {
-        throw new Error("Could not find number of reviews");
+        return res.status(500).json({ error: "Could not find number of reviews" });
     }
-    res.send({
-        statusCode: 200,
-        body: {
-            numberOfReviews,
-        },
-    });
+    res.status(200).json({ numberOfReviews });
 });
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);

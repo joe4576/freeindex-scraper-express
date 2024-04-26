@@ -1,12 +1,13 @@
-const express = require("express");
-const cors = require("cors");
+import express from "express";
+import cors from "cors";
+
 const app = express();
 const port = 3000;
 
-cors(app);
+app.use(cors());
 
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send("Hello World! With typescript");
 });
 
 app.listen(port, () => {

@@ -12,7 +12,16 @@ app.use((0, cors_1.default)());
 app.get("/", (req, res) => {
     res.send("Hello World! With typescript without manual build");
 });
-app.get("/freeindex/:profile", async (req, res) => {
+const wrapWithErrorHandling = async (fn, errorHandler) => {
+    try {
+        return await fn();
+    }
+    catch (error) {
+        console.error(error);
+        return errorHandler(error);
+    }
+};
+app.get("/freeindex/:profile", async (req, res) => wrapWithErrorHandling(async () => {
     const profile = req.params.profile;
     const url = `https://www.freeindex.co.uk/${profile}`;
     const response = await fetch(url);
@@ -25,10 +34,12 @@ app.get("/freeindex/:profile", async (req, res) => {
     }
     const numberOfReviews = reviewsText.split(" ")[0]?.replaceAll(",", "") ?? null;
     if (numberOfReviews === null) {
-        return res.status(500).json({ error: "Could not find number of reviews" });
+        return res
+            .status(500)
+            .json({ error: "Could not find number of reviews" });
     }
     res.status(200).json({ numberOfReviews });
-});
+}, (error) => res.status(500).json({ error })));
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });

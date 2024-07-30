@@ -39,31 +39,25 @@ I opted to deploy this project using a Digital Ocean Droplet - a cheap VPS. I or
 
 # Updates
 
-1. Get the container ID
+1. Kill all running containers
 
    ```
-   docker ps
+   docker kill $(docker ps -a -q)
    ```
 
-2. Kill the Docker container
-
-   ```
-   docker kill {container ID}
-   ```
-
-3. Pull the most recent changes
+2. Pull the most recent changes
 
    ```
    git pull
    ```
 
-4. Build a new Docker image
+3. Build a new Docker image
 
    ```
    make build
    ```
 
-5. Spin up a Docker container
+4. Spin up a Docker container
    ```
    make run
    ```

@@ -16,36 +16,54 @@ I opted to deploy this project using a Digital Ocean Droplet - a cheap VPS. I or
 
 2. Install `make`
 
-   > `apt install make`
+   ```
+   apt install make
+   ```
 
 3. Clone this repo using HTTPS
 
-   > `git clone https://github.com/joe4576/freeindex-scraper-express.git`
+   ```
+   git clone https://github.com/joe4576/freeindex-scraper-express.git
+   ```
 
-4. Build the docker image
+4. Build the Docker image
 
-   > `make build`
+   ```
+   make build
+   ```
 
 5. Spin up a Docker container
-   > `make run`
+   ```
+   make run
+   ```
 
 # Updates
 
 1. Get the container ID
 
-   > `docker ps`
+   ```
+   docker ps
+   ```
 
-2. Kill the container
+2. Kill the Docker container
 
-   > `docker kill {container ID}`
+   ```
+   docker kill {container ID}
+   ```
 
 3. Pull the most recent changes
 
-   > `git pull`
+   ```
+   git pull
+   ```
 
-4. Build a new image
+4. Build a new Docker image
 
-   > `make build`
+   ```
+   make build
+   ```
 
-5. Spin up a container
-   > `make run`
+5. Spin up a Docker container
+   ```
+   make run
+   ```

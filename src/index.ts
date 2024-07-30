@@ -7,10 +7,6 @@ const port = process.env.PORT || 3000;
 
 app.use(cors());
 
-app.get("/", (req, res) => {
-  res.send("Hello World! With typescript without manual build");
-});
-
 const wrapWithErrorHandling = async <T = unknown>(
   fn: (...args: any[]) => Promise<T>,
   errorHandler: (error: unknown) => any
@@ -35,8 +31,6 @@ app.get("/freeindex/:profile", async (req, res) =>
       const $ = load(data);
       const reviewsText = $("h2#reviewsTop").text();
 
-      console.log({ reviewsText });
-
       if (!reviewsText) {
         return res.status(404);
       }
@@ -57,5 +51,5 @@ app.get("/freeindex/:profile", async (req, res) =>
 );
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`FreeIndex scraper listening on port ${port}`);
 });

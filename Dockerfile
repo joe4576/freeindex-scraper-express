@@ -1,4 +1,4 @@
-FROM oven/bun:1 as base
+FROM oven/bun:1 AS base
 WORKDIR /usr/src/app
 
 FROM base AS install
@@ -16,7 +16,7 @@ COPY . .
 
 FROM base AS release
 COPY --from=install /temp/prod/node_modules node_modules
-COPY --from=prerelease /usr/src/app/index.ts .
+COPY --from=prerelease /usr/src/app/src/index.ts .
 COPY --from=prerelease /usr/src/app/package.json .
 
 USER bun

@@ -44,7 +44,7 @@ app.get("/freeindex/:profile", async (req, res) =>
           .json({ error: "Could not find number of reviews" });
       }
 
-      res.status(200).json({ numberOfReviews });
+      res.status(200).json({ numberOfReviews: JSON.parse(numberOfReviews) });
     },
     (error) => res.status(500).json({ error })
   )

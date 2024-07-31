@@ -14,5 +14,5 @@ COPY --from=build /usr/src/app/src ./src
 COPY --from=build /usr/src/app/package.json ./package.json
 
 USER bun
-EXPOSE 3000
+EXPOSE 80
 CMD ["bun", "run", "start"]

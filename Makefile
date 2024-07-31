@@ -2,4 +2,4 @@ build:
 	docker build --pull -t freeindex-scraper-express .
 
 run:
-	docker run -d -p 3000:3000 freeindex-scraper-express
+	docker run -d -p 80:80 freeindex-scraper-express

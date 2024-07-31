@@ -3,7 +3,7 @@ import cors from "cors";
 import { load } from "cheerio";
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 80;
 
 app.use(cors());
 

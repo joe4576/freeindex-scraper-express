@@ -35,16 +35,17 @@ app.get("/freeindex/:profile", async (req, res) =>
         return res.status(404);
       }
 
-      const numberOfReviews =
-        reviewsText.split(" ")[0]?.replaceAll(",", "") ?? null;
+      const numberOfReviews = parseInt(
+        reviewsText.split(" ")[0]?.replaceAll(",", "") ?? null
+      );
 
-      if (numberOfReviews === null) {
+      if (isNaN(numberOfReviews)) {
         return res
           .status(500)
-          .json({ error: "Could not find number of reviews" });
+          .json({ error: "Could not parse the number of reviews" });
       }
 
-      res.status(200).json({ numberOfReviews: JSON.parse(numberOfReviews) });
+      return res.status(200).json({ numberOfReviews });
     },
     (error) => res.status(500).json({ error })
   )

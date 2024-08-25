@@ -5,7 +5,11 @@ import { load } from "cheerio";
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://set2pass.co.uk",
+  })
+);
 
 const wrapWithErrorHandling = async <T = unknown>(
   fn: (...args: any[]) => Promise<T>,

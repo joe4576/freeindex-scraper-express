@@ -37,7 +37,7 @@ I opted to deploy this project using a Digital Ocean Droplet - a cheap VPS. I or
    make run
    ```
 
-# Updates
+## Updates
 
 1. Kill all running containers
 
@@ -61,3 +61,39 @@ I opted to deploy this project using a Digital Ocean Droplet - a cheap VPS. I or
    ```
    make run
    ```
+
+# HTTPS Configuration
+
+Follow the guides on DigitalOcean to set up Nginx:
+
+- [Initial Server Setup with Ubuntu](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu)
+- [Install Nginx on Ubuntu](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-22-04)
+- [Set up SSL with Let's Encrypt](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-22-04)
+
+Once setup, modify Nginx config to proxy requests to the docker container:
+
+```
+sudo vim /etc/nginx/sites-available/domain.com
+```
+
+```
+location / {
+   proxy_pass http://localhost:3000;
+   proxy_set_header Host $host;
+   proxy_set_header X-Real-IP $remote_addr;
+   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+   proxy_set_header X-Forwarded-Proto $scheme;
+}
+```
+
+Check for syntax errors:
+
+```
+sudo nginx -t
+```
+
+Restart Nginx:
+
+```
+sudo systemctl reload nginx
+```
